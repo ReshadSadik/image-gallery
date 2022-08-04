@@ -8,6 +8,15 @@ import { Button, TextField } from "@mui/material";
 const Images = () => {
   const [images, setImages] = React.useState();
   const [page, setPage] = React.useState(1);
+  const [keyword, setKeyword] = React.useState("");
+  console.log(keyword);
+  const inputValue = React.useRef(null);
+
+  const handleSearch = () => {
+    setKeyword(inputValue.current.value);
+    setPage(1);
+  };
+
   React.useEffect(() => {
     const onSuccess = (data) => {
       setImages(data);
@@ -35,12 +44,15 @@ const Images = () => {
         }}
       >
         <TextField
+          inputRef={inputValue}
           id="outlined-basic"
           label="Seach Photos"
           variant="outlined"
           size="small"
         />
-        <Button variant="contained">search</Button>
+        <Button onClick={handleSearch} variant="contained">
+          search
+        </Button>
       </Box>
       <Image images={images} />
       <PaginationContainer page={page} setPage={setPage} />
