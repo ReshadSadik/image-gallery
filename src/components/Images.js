@@ -1,46 +1,23 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Image from "./Image";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-    author: "@bkristastucchio",
-    rows: 2,
-    cols: 2,
-    featured: true,
-  },
-];
+import { IMAGE_SERVICE } from "../services/imageServices";
+import PaginationContainer from "./PaginationContainer";
 
 const Images = () => {
+  const [images, setImages] = React.useState();
+  const [page, setPage] = React.useState(1);
   return (
-    <Box sx={{ marginTop: "40px" }}>
-      <Image itemData={itemData} />
+    <Box
+      sx={{
+        marginTop: "40px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Image images={images} />
+      <PaginationContainer page={page} setPage={setPage} />
     </Box>
   );
 };
