@@ -7,6 +7,16 @@ import PaginationContainer from "./PaginationContainer";
 const Images = () => {
   const [images, setImages] = React.useState();
   const [page, setPage] = React.useState(1);
+  React.useEffect(() => {
+    const onSuccess = (data) => {
+      setImages(data);
+    };
+    const onError = (err) => {
+      console.log(err);
+    };
+    IMAGE_SERVICE.getImages(page, onSuccess, onError);
+  }, [page]);
+
   return (
     <Box
       sx={{
