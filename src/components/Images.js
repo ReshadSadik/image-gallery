@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRef } from "react";
 import Box from "@mui/material/Box";
 import Image from "./Image";
 import { IMAGE_SERVICE } from "../services/imageServices";
@@ -6,11 +7,11 @@ import PaginationContainer from "./PaginationContainer";
 import { Button, TextField } from "@mui/material";
 
 const Images = () => {
-  const [images, setImages] = React.useState();
-  const [page, setPage] = React.useState(1);
+  const [images, setImages] = React.useState([]);
   const [keyword, setKeyword] = React.useState("");
-  console.log(keyword);
-  const inputValue = React.useRef(null);
+  const [page, setPage] = React.useState(1);
+
+  const inputValue = useRef(null);
 
   const handleSearch = () => {
     setKeyword(inputValue.current.value);
@@ -24,8 +25,12 @@ const Images = () => {
     const onError = (err) => {
       console.log(err);
     };
-    IMAGE_SERVICE.getImages(page, onSuccess, onError);
-  }, [page]);
+    if (keyword === "") {
+      IMAGE_SERVICE.getImages(page, onSuccess, onError);
+    } else {
+      IMAGE_SERVICE.getImagesByName(keyword, page, onSuccess, onError);
+    }
+  }, [page, keyword]);
 
   return (
     <Box
