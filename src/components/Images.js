@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Image from "./Image";
 import { IMAGE_SERVICE } from "../services/imageServices";
 import PaginationContainer from "./PaginationContainer";
+import { Button, TextField } from "@mui/material";
 
 const Images = () => {
   const [images, setImages] = React.useState();
@@ -26,6 +27,21 @@ const Images = () => {
         alignItems: "center",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Seach Photos"
+          variant="outlined"
+          size="small"
+        />
+        <Button variant="contained">search</Button>
+      </Box>
       <Image images={images} />
       <PaginationContainer page={page} setPage={setPage} />
     </Box>
